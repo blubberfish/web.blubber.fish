@@ -1,15 +1,9 @@
 {
-  "name": "@blubberfish/nebula",
+  "name": "@blubberfish/lib-nebula",
   "version": "1.0.0",
-  "license": "UNLICENSED",
   "private": true,
   "exports": {
-    ".": "./src/client/index.ts",
-    "./toolkit": "./src/client/toolkit/index.ts",
-    "./host": "./src/host/index.ts",
-    "./config": "./src/config/index.ts"
-  },
-  "peerDependencies": {
-    "react": ">= 19.0.0"
+    "./dashboard": "./src/dashboard/index.ts",
+    "./*.css": "./*.css"
   }
 }
