@@ -1,7 +1,11 @@
-import React from "react";
+import { bootloader } from "@blubberfish/nebula/host";
+import React, { lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./app";
 
-const domRoot = document.body.appendChild(document.createElement("div"));
-const appRoot = createRoot(domRoot);
-appRoot.render(<App />);
+try {
+  bootloader();
+  const domRoot = document.body.appendChild(document.createElement("div"));
+  const appRoot = createRoot(domRoot);
+} catch (e) {
+  console.error("Failed to load MFE Lilypad", e);
+}

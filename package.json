@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "workspaces": [
-    "./apps/host",
-    "libs/nebula",
-    "apps/mfe-lilypad"
+    "apps/host",
+    "apps/mfe-lilypad",
+    "libs/nebula"
   ],
   "private": true
 }
