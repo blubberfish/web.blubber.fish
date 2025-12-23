@@ -4,7 +4,7 @@
   "license": "UNLICENSED",
   "workspaces": [
     "apps/*",
-    "libs/nebula"
+    "libs/*"
   ],
   "type": "module",
   "private": true

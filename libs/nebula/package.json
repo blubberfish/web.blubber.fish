@@ -4,6 +4,7 @@
   "private": true,
   "exports": {
     "./dashboard": "./src/dashboard/index.ts",
+    "./plugin-system": "./src/plugin-system/index.ts",
     "./*.css": "./*.css"
   }
 }
