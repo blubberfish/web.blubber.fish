@@ -5,10 +5,15 @@
   "exports": {
     ".": "./src/index.ts",
     "./client": "./src/client.ts",
-    "./nextjs": "./src/nextjs.ts"
+    "./nextjs": "./src/nextjs.ts",
+    "./react": "./src/react/index.ts",
+    "./*.css": "./*.css"
   },
   "dependencies": {
     "better-auth": "^1.4.9",
     "mongodb": "^7.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.18"
   }
 }

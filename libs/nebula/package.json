@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "exports": {
-    "./auth": "./src/auth/index.ts",
+    "./async": "./src/async/index.tsx",
+    "./avatar": "./src/avatar.tsx",
     "./dashboard": "./src/dashboard/index.ts",
+    "./icon": "./src/icons/index.ts",
     "./site": "./src/site/index.ts",
     "./system/*": "./src/system/*/index.ts",
     "./*.css": "./*.css"
@@ -12,5 +14,8 @@
   "dependencies": {
     "better-auth": "^1.4.9",
     "lucide-react": "^0.562.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4"
   }
 }
