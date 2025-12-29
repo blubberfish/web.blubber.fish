@@ -10,15 +10,16 @@ export class App extends Plugin {
   >(
     PluginClass: TPluginClass,
     ...args: ConstructorParameters<TPluginClass>
-  ): TPlugin {
+  ): this {
     const plugin = new PluginClass(...args);
     this.#plugins.set(Plugin.idOf(Plugin), plugin);
     plugin.app = this;
     this.emit(OnPlugin, plugin);
-    return plugin;
+    return this;
   }
 
-  setup() {
+  setup(...args: unknown[]): this {
     this.emit(OnReady);
+    return this;
   }
 }

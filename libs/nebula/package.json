@@ -4,7 +4,6 @@
   "private": true,
   "exports": {
     "./dashboard": "./src/dashboard/index.ts",
-    "./web-sync/*": "./src/web-sync/*/index.ts",
     "./system/*": "./src/system/*/index.ts",
     "./*.css": "./*.css"
   }

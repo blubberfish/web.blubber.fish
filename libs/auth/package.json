@@ -1,0 +1,14 @@
+{
+  "name": "@blubberfish/lib-auth",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./nextjs": "./src/nextjs.ts"
+  },
+  "dependencies": {
+    "better-auth": "^1.4.9",
+    "mongodb": "^7.0.0"
+  }
+}

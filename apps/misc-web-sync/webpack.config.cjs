@@ -1,13 +1,21 @@
-import HtmlPlugin from "html-webpack-plugin";
-import path from "path";
+const HtmlPlugin = require("html-webpack-plugin");
+const path = require("path");
+const { DefinePlugin } = require("webpack");
+
+const port = process.env.PORT || 8000;
 
 /** @type {import('webpack').Configuration} */
-export default {
+module.exports = {
   devServer: {
-    port: process.env.PORT || 8000,
+    allowedHosts: "all",
+    compress: true,
+    historyApiFallback: true,
+    hot: 'only',
+    port,
   },
   entry: {
     main: path.resolve("./src/index.ts"),
+    web: path.resolve("./src/sdk/index.ts"),
   },
   module: {
     rules: [
@@ -28,7 +36,11 @@ export default {
     path: path.resolve("./dist"),
   },
   plugins: [
+    new DefinePlugin({
+      WEBSYNC_URL: JSON.stringify(`http://localhost:${port}`),
+    }),
     new HtmlPlugin({
+      chunks: ["main"],
       inject: "head",
       meta: { viewport: "width=device-width, initial-scale=1" },
       minify: true,
