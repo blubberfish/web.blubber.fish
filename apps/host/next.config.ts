@@ -5,16 +5,16 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/dashboard/lilypad",
-        destination: `http://localhost:8000`,
+        source: "/app/lilypad",
+        destination: `${process.env.LILYPAD_MFE_HOST}`,
       },
       {
-        source: "/dashboard/lilypad/:path+",
-        destination: `http://localhost:8000/:path+`,
+        source: "/app/lilypad/:path+",
+        destination: `${process.env.LILYPAD_MFE_HOST}/:path+`,
       },
       {
         source: "/lilypad-assets/:path+",
-        destination: `http://localhost:8000/lilypad-assets/:path+`,
+        destination: `${process.env.LILYPAD_MFE_HOST}/lilypad-assets/:path+`,
       },
     ];
   },

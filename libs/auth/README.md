@@ -1,4 +1,4 @@
-# Requirements
+# Requirements (Hosts)
 
 These environment variables are required on your hosting service
 
@@ -11,4 +11,12 @@ AUTH_GOOGLE_ID=...
 AUTH_GOOGLE_SECRET=...
 AUTH_MONGO_DB_TABLE=...
 AUTH_MONGO_DB_URI=...
+```
+
+# Requirements (MFEs)
+
+These environment variables are required on your MFE service
+
+```
+BETTER_AUTH_URL=...
 ```
