@@ -22,7 +22,7 @@ export default function Layout({
         <script async src={process.env.WEB_SYNC_URL}></script>
       </head>
       <body className="min-h-dvh bg-gray-700 text-neutral-100">
-        <header className="h-16 px-6 py-2 sm:px-9 sm:py-3 flex flex-row flex-nowrap items-center">
+        <header className="h-16 px-6 py-2 sm:px-9 sm:py-3 flex flex-row flex-nowrap items-center bg-gray-900">
           <Link
             className="px-3 -mx-3 py-2 -my-2 rounded flex flex-row flex-nowrap items-center hover:bg-black/18"
             href="/"

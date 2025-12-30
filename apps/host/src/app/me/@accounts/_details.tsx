@@ -28,7 +28,7 @@ export default async function Component() {
 
 function List({ children }: PropsWithChildren) {
   return (
-    <dl className="grid grid-cols-1 auto-rows-min items-center-safe border border-gray-400 rounded">
+    <dl className="grid grid-cols-[1fr_min-content] auto-rows-min items-center-safe border border-gray-400 rounded">
       {children}
     </dl>
   );
