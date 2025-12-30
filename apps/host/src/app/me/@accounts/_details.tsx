@@ -1,8 +1,10 @@
 import { api } from "@blubberfish/lib-auth";
 import { LinkAccountButton } from "@blubberfish/lib-auth/react";
 import { Github, Google } from "@blubberfish/lib-nebula/icon";
+import { Link } from "lucide-react";
 import { headers } from "next/headers";
 import { PropsWithChildren } from "react";
+import { List, ListEntry, Section, Title } from "./_components"
 
 export default async function Component() {
   const accounts = await api.listUserAccounts({ headers: await headers() });
@@ -10,47 +12,45 @@ export default async function Component() {
     accounts.map((account) => [account.providerId, account])
   );
   return (
-    <section className="p-6 sm:p-9 flex flex-col">
-      <h1 className="mb-6 text-lg sm:text-xl text-neutral-300">Accounts</h1>
+    <Section>
+      <Title>Accounts</Title>
       <List>
-        <Entry providerId="github">
-          <Github className="size-6" />
-          <p>Github</p>
-        </Entry>
-        <Entry providerId="google">
-          <Google className="size-6" />
-          <p>Google</p>
-        </Entry>
+        <Account providerId="github" linked={!!accountMap.github}>
+          <header className="flex flex-row items-center gap-3">
+            <Github className="size-6" />
+            <p>Github</p>
+          </header>
+        </Account>
+        <Account providerId="google" linked={!!accountMap.google}>
+          <header className="flex flex-row items-center gap-3">
+            <Google className="size-6" />
+            <p>Google</p>
+          </header>
+        </Account>
       </List>
-    </section>
+    </Section>
   );
 }
 
-function List({ children }: PropsWithChildren) {
-  return (
-    <dl className="grid grid-cols-[1fr_min-content] auto-rows-min items-center-safe border border-gray-400 rounded">
-      {children}
-    </dl>
-  );
-}
-
-function Entry({
+function Account({
   providerId,
   children,
-}: PropsWithChildren<{
-  providerId: "github" | "google";
-}>) {
+  linked,
+}: PropsWithChildren<{ providerId: "github" | "google"; linked?: boolean }>) {
   return (
-    <>
-      <dt className="flex flex-row flex-nowrap items-center-safe px-3 py-2 gap-2 not-first:border-t border-gray-400 font-semibold">
-        {children}
-      </dt>
-      <dd className="px-3 py-2">
+    <ListEntry>
+      <div className="flex flex-col gap-1 p-3">{children}</div>
+      {linked ? (
+        <div className="px-3 py-1 flex flex-row flex-nowrap items-center gap-1">
+          <Link className="size-4" />
+          <span>Linked</span>
+        </div>
+      ) : (
         <LinkAccountButton
-          className="px-3 py-1 bg-white hover:ring-2 hover:ring-blue-300 text-gray-800 rounded flex flex-row flex-nowrap items-center-safe gap-x-1"
+          className="m-3 px-3 py-1 bg-white hover:ring-2 hover:ring-blue-300 text-gray-800 rounded flex flex-row flex-nowrap items-center-safe gap-x-1"
           provider={providerId}
         />
-      </dd>
-    </>
+      )}
+    </ListEntry>
   );
 }

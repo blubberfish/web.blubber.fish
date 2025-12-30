@@ -1,13 +1,24 @@
+import { List, ListEntry, Section, Title } from "./_components";
+
 export default function Component() {
   return (
-    <section className="p-6 sm:p-9 bg-gray-800 flex flex-col items-center-safe">
-      <div className="size-18 sm:size-24 rounded-full overflow-hidden bg-stone-400 animate-pulse" />
-      <div className="rounded max-w-full w-[12ch] mt-6 sm:mt-9 font-semibold text-lg sm:text-xl bg-stone-400 animate-pulse">
-        &nbsp;
+    <Section>
+      <Title>Accounts</Title>
+      <List>
+        <Bone />
+        <Bone />
+      </List>
+    </Section>
+  );
+}
+
+function Bone() {
+  return (
+    <ListEntry>
+      <div className="p-3 gap-3 flex flex-row flex-nowrap items-center">
+        <div className="size-6 bg-gray-400 rounded animate-pulse"></div>
+        <div className="w-[8ch] bg-gray-400 rounded animate-pulse">&nbsp;</div>
       </div>
-      <div className="rounded max-w-full w-[24ch] mt-2 sm:mt-3 text-gray-400 text-xs sm:text-sm bg-stone-400 animate-pulse">
-        &nbsp;
-      </div>
-    </section>
+    </ListEntry>
   );
 }
