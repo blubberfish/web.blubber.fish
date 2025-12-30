@@ -6,6 +6,12 @@ const mongoDbClient = new MongoClient(process.env.AUTH_MONGO_DB_URI!);
 const mongdbTable = mongoDbClient.db(process.env.AUTH_MONGO_DB_TABLE);
 
 export const auth = betterAuth({
+  account: {
+    accountLinking: {
+      enabled: true,
+      allowDifferentEmails: true,
+    },
+  },
   socialProviders: {
     github: {
       clientId: process.env.AUTH_GITHUB_ID!,
