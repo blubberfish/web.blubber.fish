@@ -1,7 +1,7 @@
-import { auth } from '@/lib/auth-client'
+import { auth } from "@/lib/auth-client";
 import type { Metadata } from "next";
 import "./globals.css";
-import { headers } from 'next/headers';
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Lilypad",
@@ -13,15 +13,14 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth.getSession({ fetchOptions: {
-    headers: await headers(),
-  } });
-  console.log(session);
+  const session = await auth.getSession({
+    fetchOptions: {
+      headers: await headers(),
+    },
+  });
   return (
     <html lang="en">
-      <head>
-        <script async src={process.env.WEB_SYNC_URL}></script>
-      </head>
+      <head></head>
       <body>{children}</body>
     </html>
   );

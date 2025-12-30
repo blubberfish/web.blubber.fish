@@ -6,9 +6,6 @@ export default async function Page() {
   await api.signOut({
     headers: await headers(),
   });
-  await new Promise(resolve => {
-    setTimeout(resolve, 5000);
-  })
 
   return (
     <div>
