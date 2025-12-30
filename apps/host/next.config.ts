@@ -13,8 +13,8 @@ const nextConfig: NextConfig = {
         destination: `${process.env.LILYPAD_MFE_HOST}/:path+`,
       },
       {
-        source: "/lilypad-assets/:path+",
-        destination: `${process.env.LILYPAD_MFE_HOST}/:path+`,
+        source: "/lilypad-static/:path+",
+        destination: `${process.env.LILYPAD_MFE_HOST}/lilypad-static/:path+`,
       },
     ];
   },
