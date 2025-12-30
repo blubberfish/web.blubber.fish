@@ -8,6 +8,7 @@ export function LoginWithGoogle() {
       onClick={() => {
         auth.signIn.social({
           provider: "google",
+          callbackURL: new URL("/app", window.location.href).href,
         });
       }}
     >

@@ -1,3 +1,4 @@
+import { Hero } from '@/components/home/hero'
 import Link from "next/link";
 
 function Stack() {
@@ -29,10 +30,16 @@ function Stack() {
 export default function Page() {
   return (
     <>
+      <Hero />
+    </>
+  );
+}
+
+/*
+
       <section className="group bg-gray-900 text-white">
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-[1fr_2fr] grid-rows-1">
           <div className="size-full overflow-hidden transform-3d">
-            <Stack />
           </div>
           <div className="p-6 sm:p-9">
             <p className="">
@@ -47,6 +54,5 @@ export default function Page() {
           </div>
         </div>
       </section>
-    </>
-  );
-}
+
+      */

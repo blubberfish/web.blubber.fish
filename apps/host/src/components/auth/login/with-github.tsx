@@ -8,6 +8,7 @@ export function LoginWithGitHub() {
       onClick={() => {
         auth.signIn.social({
           provider: "github",
+          callbackURL: new URL("/app", window.location.href).href,
         });
       }}
     >
