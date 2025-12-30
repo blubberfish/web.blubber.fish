@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "MFE_ASSETS=extended next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

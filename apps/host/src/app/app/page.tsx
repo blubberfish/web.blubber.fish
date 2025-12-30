@@ -36,24 +36,22 @@ export default async function Page() {
         </header>
         <ul className="px-6 sm:px-9 gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           <li>
-            <Link
+            <a
               className="relative block p-3 gap-3 rounded bg-white text-gray-800 hover:ring-2 hover:ring-blue-300"
               href="/app/lilypad"
-              prefetch={false}
             >
               <AppWindowMac className="absolute left-3 inset-y-3" />
               <center>Lilypad</center>
-            </Link>
+            </a>
           </li>
           <li>
-            <Link
+            <a
               className="relative block p-3 gap-3 rounded bg-white text-gray-800 hover:ring-2 hover:ring-blue-300"
               href="https://bus.sg.app.blubber.fish/"
-              prefetch={false}
             >
               <AppWindowMac className="absolute left-3 inset-y-3" />
               <center>Bus@SG</center>
-            </Link>
+            </a>
           </li>
         </ul>
       </Section>
