@@ -6,6 +6,5 @@
     "apps/*",
     "libs/*"
   ],
-  "type": "module",
   "private": true
 }
