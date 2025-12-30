@@ -1,6 +1,5 @@
 import { api } from "@blubberfish/lib-auth";
 import { headers } from "next/headers";
-import Link from "next/link";
 
 export default async function Page() {
   await api.signOut({
@@ -8,11 +7,8 @@ export default async function Page() {
   });
 
   return (
-    <div>
-      <p>Successfully signed out...</p>
-      <Link href="/" prefetch={false}>
-        Back
-      </Link>
+    <div className="w-xs mx-auto p-6 gap-6 flex flex-col items-center-safe bg-gray-800 rounded">
+      <p className="text-sm">You have been successfully signed out.</p>
     </div>
   );
 }
