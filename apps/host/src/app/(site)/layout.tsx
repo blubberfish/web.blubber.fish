@@ -18,7 +18,7 @@ export default async function Layout({
         <div className="pl-6 py-4 sm:pl-9 sm:py-6">
           <Link
             className="block px-3 py-2 -mx-3 -my-2 rounded hover:bg-black/13"
-            href="/me"
+            href="/"
             title="Home page"
             prefetch={false}
           >
