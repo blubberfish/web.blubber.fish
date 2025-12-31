@@ -7,6 +7,7 @@
     "./avatar": "./src/avatar.tsx",
     "./button": "./src/button.tsx",
     "./dashboard": "./src/dashboard/index.ts",
+    "./file-system": "./src/file-system/index.tsx",
     "./icon": "./src/icons/index.ts",
     "./site": "./src/site/index.ts",
     "./system/*": "./src/system/*/index.ts",

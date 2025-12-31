@@ -1,7 +1,8 @@
-import { auth } from "@/lib/auth-client";
+import { auth } from "@blubberfish/lib-auth/client";
+import { FileExplorer } from "@blubberfish/lib-nebula/file-system";
 import type { Metadata } from "next";
-import "./globals.css";
 import { headers } from "next/headers";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Lilypad",
@@ -14,14 +15,21 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   const session = await auth.getSession({
-    fetchOptions: {
-      headers: await headers(),
-    },
+    fetchOptions: { headers: await headers() },
   });
+  console.log(session);
   return (
     <html lang="en">
       <head></head>
-      <body>{children}</body>
+      <body>
+        <div>
+          <header>
+            <h1>EXPLORER</h1>
+          </header>
+          <FileExplorer />
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
