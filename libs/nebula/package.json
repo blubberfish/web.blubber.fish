@@ -5,6 +5,7 @@
   "exports": {
     "./async": "./src/async/index.tsx",
     "./avatar": "./src/avatar.tsx",
+    "./button": "./src/button.tsx",
     "./dashboard": "./src/dashboard/index.ts",
     "./icon": "./src/icons/index.ts",
     "./site": "./src/site/index.ts",

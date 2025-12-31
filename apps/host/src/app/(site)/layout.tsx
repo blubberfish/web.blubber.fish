@@ -29,17 +29,12 @@ export default async function Layout({
           </Link>
         </div>
         <nav className="flex flex-row flex-nowrap items-center-safe pr-6 py-4 sm:pr-9 sm:py-6">
-          {session ? (
-            <Link className="block rounded-full hover:ring-2 hover:ring-blue-300" href="/me">
-              <Avatar fullName={session.user.name} />
-            </Link>
-          ) : (
+          {session && (
             <Link
-              className="block p-3 -m-3 hover:ring-2 hover:ring-blue-300"
-              href="/sign-in"
-              prefetch={false}
+              className="block rounded-full hover:ring-2 hover:ring-blue-300"
+              href="/me"
             >
-              Sign in
+              <Avatar fullName={session.user.name} />
             </Link>
           )}
         </nav>

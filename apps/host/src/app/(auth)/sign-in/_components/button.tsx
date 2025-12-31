@@ -1,20 +1,27 @@
 "use client";
 
-import { auth } from "@blubberfish/lib-auth/client";
-import type { ButtonHTMLAttributes } from "react";
+import { ButtonWithIcon } from "@blubberfish/lib-nebula/button";
+import { type ComponentProps, useContext } from "react";
+import { SignInContext } from "../_contexts/sign-in";
 
 export function Button({
   authProvider,
+  disabled: disabledProp,
   onClick,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { authProvider: string }) {
+}: ComponentProps<typeof ButtonWithIcon> & {
+  authProvider: "github" | "google";
+}) {
+  const { getDisabled, signIn } = useContext(SignInContext);
   return (
-    <button
+    <ButtonWithIcon
+      disabled={getDisabled() || disabledProp}
+      title={`Sign in with ${authProvider}`}
+      type="button"
       onClick={(event) => {
-        auth.signIn.social({
+        signIn({
           provider: authProvider,
-          callbackURL: new URL("/app", window.location.href).href,
-          newUserCallbackURL: new URL("/me", window.location.href).href,
+          redirectTo: new URL("/app", window.location.href).href,
         });
         onClick?.(event);
       }}
