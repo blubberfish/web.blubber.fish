@@ -1,29 +1,23 @@
 import type { NextConfig } from "next";
 
-const extendedMfeAssetRedirection = process.env.MFE_ASSETS === "extended";
-const mfeConfig = {
-  lilypad: [
-    {
-      source: "/app/lilypad",
-      destination: `${process.env.LILYPAD_MFE_HOST}`,
-    },
-    {
-      source: "/app/lilypad/:path+",
-      destination: `${process.env.LILYPAD_MFE_HOST}/:path+`,
-    },
-    {
-      source: "/lilypad-static/:path+",
-      destination: extendedMfeAssetRedirection
-        ? `${process.env.LILYPAD_MFE_HOST}/lilypad-static/:path+`
-        : `${process.env.LILYPAD_MFE_HOST}/:path+`,
-    },
-  ],
-};
-
 const nextConfig: NextConfig = {
   /* config options here */
   async rewrites() {
-    return Object.values(mfeConfig).flatMap((routes) => routes);
+    return [
+      /** @description Lilypad MFE */
+      {
+        source: process.env.LILYPAD_MFE_PATH!,
+        destination: process.env.LILYPAD_MFE_BASE_URL!,
+      },
+      {
+        source: `${process.env.LILYPAD_MFE_PATH!}/:path+`,
+        destination: `${process.env.LILYPAD_MFE_BASE_URL!}/:path+`,
+      },
+      {
+        source: `${process.env.LILYPAD_MFE_ASSET_PATH!}/:path+`,
+        destination: `${process.env.LILYPAD_MFE_ASSETS_URL!}/:path+`,
+      },
+    ];
   },
 };
 
