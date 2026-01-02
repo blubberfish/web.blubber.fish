@@ -16,26 +16,37 @@ function defineMfe({
     basePath: string;
   };
 } {
-  const rootUrl = new URL(appPath, host);
-  const mfeUrl = new URL(
-    [rootUrl.pathname, "/:path+"].join("/").replace(/\/+/g, "/"),
-    rootUrl
-  );
-  const assetUrl = new URL(
-    [assetPath, "/:path+"].join("/").replace(/\/+/g, "/"),
-    rootUrl
-  );
-  return {
-    HOST: [
-      { source: rootUrl.pathname, destination: rootUrl.href },
-      { source: mfeUrl.pathname, destination: mfeUrl.href },
-      { source: assetUrl.pathname, destination: assetUrl.href },
-    ],
-    MFE: {
-      assetPrefix: assetPath,
-      basePath: appPath,
-    },
-  };
+  try {
+    const rootUrl = new URL(appPath, host);
+    const mfeUrl = new URL(
+      [rootUrl.pathname, "/:path+"].join("/").replace(/\/+/g, "/"),
+      rootUrl
+    );
+    const assetUrl = new URL(
+      [assetPath, "/:path+"].join("/").replace(/\/+/g, "/"),
+      rootUrl
+    );
+    return {
+      HOST: [
+        { source: rootUrl.pathname, destination: rootUrl.href },
+        { source: mfeUrl.pathname, destination: mfeUrl.href },
+        { source: assetUrl.pathname, destination: assetUrl.href },
+      ],
+      MFE: {
+        assetPrefix: assetPath,
+        basePath: appPath,
+      },
+    };
+  } catch (error) {
+    console.error("Error defining MFE configuration:", error);
+    return {
+      HOST: [],
+      MFE: {
+        assetPrefix: assetPath,
+        basePath: appPath,
+      },
+    };
+  }
 }
 
 export const LILYPAD = defineMfe({
