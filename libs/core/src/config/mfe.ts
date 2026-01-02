@@ -35,10 +35,14 @@ function defineMfe({
     [assetPath, "/:path+"].join("/").replace(/\/+/g, "/"),
     rootUrl
   );
+  const isLocal = ["localhost", "127.0.0.1"].includes(assetUrl.hostname);
   result.HOST.push(
     { source: rootUrl.pathname, destination: rootUrl.href },
     { source: mfeUrl.pathname, destination: mfeUrl.href },
-    { source: assetUrl.pathname, destination: assetUrl.href }
+    {
+      source: assetUrl.pathname,
+      destination: isLocal ? assetUrl.href : mfeUrl.href,
+    }
   );
   return result;
 }
