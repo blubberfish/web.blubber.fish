@@ -3,7 +3,6 @@ import type { SVGProps } from "react";
 export function Github(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      className="h-full fill-current"
       fill="currentColor"
       role="img"
       viewBox="0 0 24 24"

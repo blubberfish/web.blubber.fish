@@ -1,9 +1,10 @@
-import type { SVGProps } from "react";
+import { type SVGProps } from "react";
 
-export function Blubberfish({ className, ...props }: SVGProps<SVGSVGElement>) {
+export function Blubberfish(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      className={className || "fill-current"}
+      fill="currentColor"
+      role="img"
       viewBox="0 0 100 100"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
