@@ -19,32 +19,31 @@ export function useFolder(
       return;
     }
     let cancel = false;
-    pending
-      .then(async (resolvedRoot) => {
-        const directories: FileSystemDirectoryHandle[] = [];
-        const files: FileSystemFileHandle[] = [];
-        for await (const handle of (
-          resolvedRoot as typeof resolvedRoot & {
-            values(): AsyncIterable<
-              FileSystemDirectoryHandle | FileSystemFileHandle
-            >;
-          }
-        ).values()) {
-          switch (handle.kind) {
-            case "directory":
-              directories.push(handle as FileSystemDirectoryHandle);
-              break;
-            case "file":
-              files.push(handle as FileSystemFileHandle);
-              break;
-          }
+    pending.then(async (resolvedRoot) => {
+      const directories: FileSystemDirectoryHandle[] = [];
+      const files: FileSystemFileHandle[] = [];
+      for await (const handle of (
+        resolvedRoot as typeof resolvedRoot & {
+          values(): AsyncIterable<
+            FileSystemDirectoryHandle | FileSystemFileHandle
+          >;
         }
-        if (cancel) return;
-        setOrigin(resolvedRoot);
-        setDirectories(directories);
-        setFiles(files);
-        setPending(() => undefined);
-      });
+      ).values()) {
+        switch (handle.kind) {
+          case "directory":
+            directories.push(handle as FileSystemDirectoryHandle);
+            break;
+          case "file":
+            files.push(handle as FileSystemFileHandle);
+            break;
+        }
+      }
+      if (cancel) return;
+      setOrigin(resolvedRoot);
+      setDirectories(directories);
+      setFiles(files);
+      setPending(() => undefined);
+    });
     return () => {
       cancel = true;
     };
@@ -77,6 +76,27 @@ export function useFolder(
           setPending(
             origin.getDirectoryHandle(name, { create: true }).then(() => origin)
           );
+        },
+        createFile(name: string) {
+          if (!origin) throw new Error();
+          if (files?.some((file) => file.name === name)) {
+            return;
+          }
+          setPending(
+            origin.getFileHandle(name, { create: true }).then(() => origin)
+          );
+        },
+        delete(name: string) {
+          if (!origin) throw new Error();
+          if (
+            !(
+              files?.some((file) => file.name === name) ||
+              directories?.some((dir) => dir.name === name)
+            )
+          ) {
+            return;
+          }
+          setPending(origin.removeEntry(name).then(() => origin));
         },
       };
 }

@@ -11,6 +11,7 @@
     "./icon": "./src/icons/index.ts",
     "./site": "./src/site/index.ts",
     "./system/*": "./src/system/*/index.ts",
+    "./utils": "./src/utils/index.ts",
     "./*.css": "./*.css"
   },
   "dependencies": {

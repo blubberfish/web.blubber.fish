@@ -1,64 +1,101 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { CreateFolderButton } from "./components/create-folder-button";
+import { useState } from "react";
 import { useFolder } from "./hooks";
 
+export interface IRenderFolderProps {
+  folderName: string;
+  isOpened?: boolean;
+  canDelete?: boolean;
+  onCreateFile?: { (name: string): void };
+  onCreateFolder?: { (name: string): void };
+  onDelete?: { (): void };
+  onToggleContents?: { (): void };
+}
+export interface IRenderFileProps {
+  fileName: string;
+  folderName: string;
+  canDelete?: boolean;
+  onDelete?: { (): void };
+}
+
 export function FileExplorer({
+  renderLoading,
+  renderFile,
+  renderFolder,
+  basePath,
+  defaultHideContents = false,
+  defaultName = "(root)",
+  onDeleteContent,
   source,
 }: {
+  basePath?: string;
+  defaultHideContents?: boolean;
+  defaultName?: string;
   source?: FileSystemDirectoryHandle | Promise<FileSystemDirectoryHandle>;
+  onDeleteContent?: { (name: string): void };
+  renderLoading: { (): React.ReactNode };
+  renderFile: { (props: IRenderFileProps): React.ReactNode };
+  renderFolder: { (props: IRenderFolderProps): React.ReactNode };
 }) {
-  const folder = useFolder(source, "");
-  const [showContent, setShowContent] = useState(false);
-  const [creatingFolder, setCreatingFolder] = useState(false);
+  const folder = useFolder(source, basePath || "");
+  const [showContents, setShowContents] = useState(!defaultHideContents);
 
   if (!folder) {
-    return null;
+    return renderLoading();
   }
 
-  const root = folder.getRoot();
   const directories = folder.getDirectories();
   const files = folder.getFiles();
+
   return (
-    <div>
-      <div>{root.name}</div>
-      <nav>
-        <CreateFolderButton
-          disabled={creatingFolder}
-          onClick={() => setCreatingFolder(true)}
-        />
-      </nav>
-      <>
-        <ul>
-          {creatingFolder && (
-            <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                const data = new FormData(event.currentTarget);
-                folder.createFolder(data.get("folder") as string);
-                setCreatingFolder(false);
+    <>
+      {renderFolder({
+        folderName: folder.getRoot().name || defaultName,
+        canDelete: Boolean(onDeleteContent),
+        isOpened: showContents,
+        onCreateFile(name) {
+          folder.createFile(name);
+        },
+        onCreateFolder(name) {
+          folder.createFolder(name);
+        },
+        onDelete: () => {
+          if (onDeleteContent) {
+            onDeleteContent(folder.getRoot().name);
+          }
+        },
+        onToggleContents() {
+          setShowContents((current) => !current);
+        },
+      })}
+      {showContents && (
+        <>
+          {directories.map((directory) => (
+            <FileExplorer
+              defaultHideContents
+              basePath={folder.getPath()}
+              source={directory}
+              renderLoading={renderLoading}
+              renderFile={renderFile}
+              renderFolder={renderFolder}
+              onDeleteContent={(name) => {
+                folder.delete(name);
               }}
-            >
-              <input type="text" name="folder" required />
-            </form>
-          )}
-          {showContent && (
-            <>
-              {directories.map((directory) => (
-                <li key={directory.name}>
-                  <FileExplorer source={directory} />
-                </li>
-              ))}
-            </>
-          )}
-        </ul>
-        <ul>
-          {files.map((file) => (
-            <li key={file.name}>{file.name}</li>
+            />
           ))}
-        </ul>
-      </>
-    </div>
+          {files.map((file) =>
+            renderFile({
+              fileName: file.name,
+              folderName: folder.getPath(),
+              canDelete: true,
+              onDelete() {
+                folder.delete(file.name);
+              },
+            })
+          )}
+        </>
+      )}
+    </>
   );
 }

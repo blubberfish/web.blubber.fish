@@ -1,1 +1,1 @@
-export * from "@blubberfish/lib-auth/nextjs";
+export * from "@blubberfish/core/auth/nextjs";

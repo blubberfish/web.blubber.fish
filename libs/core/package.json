@@ -1,0 +1,13 @@
+{
+  "name": "@blubberfish/core",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    "./auth/*": "./src/auth/*.ts",
+    "./config/*": "./src/config/*.ts"
+  },
+  "dependencies": {
+    "better-auth": "^1",
+    "mongodb": "^7"
+  }
+}
