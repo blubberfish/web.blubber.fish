@@ -13,7 +13,11 @@ export default async function Layout({
 }>) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        {process.env.SCRIPT_BLUBBERFISH && (
+          <script async src={process.env.SCRIPT_BLUBBERFISH}></script>
+        )}
+      </head>
       <body>{children}</body>
     </html>
   );
