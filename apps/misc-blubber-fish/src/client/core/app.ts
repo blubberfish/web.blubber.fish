@@ -8,7 +8,7 @@ declare global {
 export class PortalClient extends App {
   static #frame = document.head.appendChild(document.createElement("iframe"));
 
-  static init() {
+  static init(params: { url: string }) {
     const property = Symbol.for("blubberfish_");
     if (Object.hasOwn(window.navigator, property)) {
       return window.navigator[property] as PortalClient;
@@ -20,8 +20,8 @@ export class PortalClient extends App {
     PortalClient.#frame.style.left = "-1px";
     PortalClient.#frame.style.width = "0px";
     PortalClient.#frame.style.height = "0px";
-    PortalClient.#frame.title = "blubberfish portal"
-    PortalClient.#frame.src = __FRAME_URL__;
+    PortalClient.#frame.title = "blubberfish portal";
+    PortalClient.#frame.src = params.url;
     const value = new PortalClient();
     Object.defineProperty(window.navigator, property, {
       value,

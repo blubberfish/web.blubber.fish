@@ -38,7 +38,6 @@ module.exports = {
   },
   plugins: [
     new DefinePlugin({
-      __FRAME_URL__: JSON.stringify(`http://localhost:${port}`),
       __VERSION__: JSON.stringify(version),
     }),
     new HtmlPlugin({
@@ -46,7 +45,6 @@ module.exports = {
       inject: "head",
       meta: { viewport: "width=device-width, initial-scale=1" },
       minify: true,
-      scriptLoading: "async",
       title: "web-sync",
     }),
   ],
