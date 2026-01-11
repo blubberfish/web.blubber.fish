@@ -1,7 +1,7 @@
 const HtmlPlugin = require("html-webpack-plugin");
 const path = require("path");
 const { DefinePlugin } = require("webpack");
-const { version } = require("./package.json")
+const { version } = require("./package.json");
 
 const port = process.env.PORT || 8000;
 
@@ -38,6 +38,7 @@ module.exports = {
   },
   plugins: [
     new DefinePlugin({
+      __FRAME_URL__: JSON.stringify(`http://localhost:${port}`),
       __VERSION__: JSON.stringify(version),
     }),
     new HtmlPlugin({
