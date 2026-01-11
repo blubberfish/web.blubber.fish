@@ -1,6 +1,7 @@
 const HtmlPlugin = require("html-webpack-plugin");
 const path = require("path");
 const { DefinePlugin } = require("webpack");
+const { version } = require("./package.json")
 
 const port = process.env.PORT || 8000;
 
@@ -10,12 +11,12 @@ module.exports = {
     allowedHosts: "all",
     compress: true,
     historyApiFallback: true,
-    hot: 'only',
+    hot: "only",
     port,
   },
   entry: {
-    "bf/core": path.resolve("./src/core/index.ts"),
-    "bf/web": path.resolve("./src/sdk/index.ts"),
+    main: "./src/portal/index.ts",
+    "integrations/web": "./src/client/index.ts",
   },
   module: {
     rules: [
@@ -37,14 +38,14 @@ module.exports = {
   },
   plugins: [
     new DefinePlugin({
-      WEBSYNC_URL: JSON.stringify(`http://localhost:${port}`),
+      __VERSION__: JSON.stringify(version),
     }),
     new HtmlPlugin({
-      chunks: ["bf/core"],
+      chunks: ["main"],
       inject: "head",
       meta: { viewport: "width=device-width, initial-scale=1" },
       minify: true,
-      scriptLoading: "blocking",
+      scriptLoading: "async",
       title: "web-sync",
     }),
   ],
